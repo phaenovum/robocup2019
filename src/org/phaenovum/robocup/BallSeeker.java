@@ -106,5 +106,6 @@ public class BallSeeker {
 				Sound.beepSequence();
 			}
 		}
+		mux.close();
 	}
 }
