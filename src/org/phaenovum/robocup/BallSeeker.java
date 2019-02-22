@@ -60,7 +60,12 @@ public class BallSeeker {
 		seeker.getModulatedMode().fetchSample(sample_ir, 0);
 		int angle = (int) -sample_ir[0];
 		LCD.drawString("angle: " + angle, 0, 3);
-		if (angle == 0) {
+		if (sample_ir[0] == Float.NaN) {
+			Sound.beep();
+			int dir = (int) (Math.random() * 2) - 1;
+			pilot.setAngularSpeed(10);
+			pilot.rotate(dir * 90);
+		} else if (angle == 0) {
 			pilot.forward();
 		} else if (angle <= 150 && angle >= -150) {
 			int angSpeed = Math.abs(angle);
@@ -70,11 +75,6 @@ public class BallSeeker {
 			//pilot.spinningMove(SPEED, angSpeed, angle/4);
 			pilot.setAngularSpeed(angSpeed);
 			pilot.rotate(angle / 4);
-		} else {
-			Sound.beep();
-			int dir = (int) (Math.random() * 2) - 1;
-			pilot.setAngularSpeed(10);
-			pilot.rotate(dir * 90);
 		}
 		return false;
 	}
