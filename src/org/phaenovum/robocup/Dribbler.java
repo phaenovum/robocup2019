@@ -8,6 +8,7 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.robotics.navigation.OmniPilot;
 
+@SuppressWarnings("deprecation")
 public class Dribbler {
 
 	EV3LargeRegulatedMotor motor;
@@ -25,7 +26,6 @@ public class Dribbler {
 		motor.rotate(-1440, true);
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
 		EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
@@ -78,10 +78,7 @@ public class Dribbler {
 				go = false;
 				break;
 			}
-
 		}
 		pilot.stop();
-
 	}
-
 }
