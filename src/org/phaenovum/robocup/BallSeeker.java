@@ -103,7 +103,7 @@ public class BallSeeker {
 				pilot.rotate(360);
 				pilot.travel(-100);
 				pilot.rotate(-360);
-				break;
+				Sound.beepSequence();
 			}
 		}
 	}
