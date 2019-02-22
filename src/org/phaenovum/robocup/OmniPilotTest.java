@@ -58,26 +58,34 @@ public class OmniPilotTest {
 				LCD.drawString("ROTATE LEFT 90", 0, 3);
 				pilot.rotate(90);
 				break;
-				
+
 			case 5:
 				LCD.drawString("ROTATE RIGHT 90", 0, 3);
 				pilot.rotate(-90);
 				break;
-				
+
 			case 6:
 				LCD.drawString("SPIN MOVE LEFT", 0, 3);
 				pilot.spinningMove(400, 60, 90);
-//				LCD.drawString("ROTATE LEFT", 0, 3);
-//				pilot.rotateLeft();
 				break;
-				
+
 			case 7:
 				LCD.drawString("SPIN MOVE RIGHT", 0, 3);
 				pilot.spinningMove(400, 60, -90);
-//				LCD.drawString("ROTATE RIGHT", 0, 3);
-//				pilot.rotateRight();
 				break;
-				
+
+			case 8:
+				LCD.drawString("ROTATE LEFT", 0, 3);
+				pilot.setAngularSpeed(20);
+				pilot.rotateLeft();
+				break;
+
+			case 9:
+				LCD.drawString("ROTATE RIGHT", 0, 3);
+				pilot.setAngularSpeed(20);
+				pilot.rotateRight();
+				break;
+
 			default:
 				go = false;
 				break;
