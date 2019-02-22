@@ -98,6 +98,11 @@ public class BallSeeker {
 
 			if (bs.seekBall()) {
 				Sound.beepSequenceUp();
+				pilot.setLinearSpeed(100);
+				pilot.travel(100);
+				pilot.rotate(360);
+				pilot.travel(-100);
+				pilot.rotate(-360);
 				break;
 			}
 		}
