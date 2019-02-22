@@ -62,5 +62,6 @@ public class HiTechnicIRSeekerV2Improved extends HiTechnicIRSeekerV2 {
 				LCD.drawString("" + i + ": " + sample[i], 0, i);
 			}
 		}
+		seeker.close();
 	}
 }
