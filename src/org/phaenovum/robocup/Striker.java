@@ -31,7 +31,7 @@ public class Striker {
 		int angle = (int) sample[0];
 		angle = angle % 360;
 		if (sample[0] < 0) {
-			angle = 360 - angle;
+			angle = angle - 360;
 		}
 		if (0 == System.currentTimeMillis() % 100) {
 			LCD.drawString("Gyro: " + angle, 0, 5);
@@ -39,12 +39,12 @@ public class Striker {
 
 		pilot.setAngularSpeed(20);
 		if (Math.abs(angle) <= 1) {
-			pilot.setAngularSpeed(20);
-			pilot.rotate(angle);
-		} else {
 			Sound.beep();
 			pilot.setLinearSpeed(200);
 			pilot.forward();
+		} else {
+			pilot.setAngularSpeed(20);
+			pilot.rotate(angle);
 		}
 		// pilot.spinningMove(200, 10, (int) angle);
 		return false;
