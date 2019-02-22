@@ -58,7 +58,7 @@ public class BallSeeker {
 		 * </pre>
 		 */
 		seeker.getModulatedMode().fetchSample(sample_ir, 0);
-		int angle = (int) sample_ir[0];
+		int angle = (int) -sample_ir[0];
 		LCD.drawString("angle: " + angle, 0, 3);
 		if (angle == 0) {
 			pilot.forward();
