@@ -21,9 +21,10 @@ public class BallSeeker {
 	float[] sample_us;
 	float[] sample_ir;
 	final float SPEED = 500;
-	final float LIMIT = 0.05f;
+	final float LIMIT = 0.04f;
 	final float FACTOR = 1.7f;
 	// private float prev_angle = 0;
+	int count = 0;
 
 	BallSeeker(HiTechnicIRSeekerV2 seeker, MindsensorsEV3SensorMUXPort mux_port, OmniPilot pilot) {
 		this.seeker = seeker;
@@ -34,16 +35,19 @@ public class BallSeeker {
 	}
 
 	boolean seekBall() {
-		mux_port.getDistanceMode().fetchSample(sample_us, 0);
-		float dist = sample_us[0];
-		if (dist < LIMIT) {
+		if (count > 3) {
 			pilot.stop();
 			LCD.clear();
 			return true;
 		}
+		mux_port.getDistanceMode().fetchSample(sample_us, 0);
+		float dist = sample_us[0];
+		if (dist < LIMIT) {
+			count++;
+		}
 		/**
 		 * angle with zero forward, anti-clockwise positive
-		 * 
+		 *
 		 * <pre>
 		 *        0
 		 *        ^
