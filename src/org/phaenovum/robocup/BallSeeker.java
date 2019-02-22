@@ -22,8 +22,6 @@ public class BallSeeker {
 	float[] sample_ir;
 	final float SPEED = 500;
 	final float LIMIT = 0.04f;
-	final float FACTOR = 1.7f;
-	// private float prev_angle = 0;
 	int count = 0;
 
 	BallSeeker(HiTechnicIRSeekerV2 seeker, MindsensorsEV3SensorMUXPort mux_port, OmniPilot pilot) {
@@ -62,7 +60,7 @@ public class BallSeeker {
 		int angle = (int) sample_ir[0];
 		if (angle == 0) {
 			pilot.moveStraight(SPEED, 0);
-		} else if (angle <= 150 && angle >= -150 /* && angle != prev_angle */) {
+		} else if (angle <= 150 && angle >= -150) {
 			int angSpeed = Math.abs(angle);
 			if (angSpeed > pilot.getMaxAngularSpeed()) {
 				angSpeed = (int) pilot.getMaxAngularSpeed();
@@ -73,7 +71,6 @@ public class BallSeeker {
 			int dir = (int) (Math.random() * 2) - 1;
 			pilot.rotate(dir * 90);
 		}
-		// prev_angle = angle;
 		return false;
 	}
 
