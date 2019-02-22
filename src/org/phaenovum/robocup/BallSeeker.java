@@ -79,10 +79,14 @@ public class BallSeeker {
 		EV3LargeRegulatedMotor motorRight = new EV3LargeRegulatedMotor(MotorPort.B);
 		EV3LargeRegulatedMotor motorLeft = new EV3LargeRegulatedMotor(MotorPort.A);
 		EV3LargeRegulatedMotor motorBack = new EV3LargeRegulatedMotor(MotorPort.C);
+		EV3LargeRegulatedMotor motorDribbler = new EV3LargeRegulatedMotor(MotorPort.D);
 		OmniPilot pilot = new OmniPilot(89f, 64f, motorBack, motorLeft, motorRight, false, true,
 				LocalEV3.get().getPower());
 
 		BallSeeker bs = new BallSeeker(seeker, mux.C3, pilot);
+		Dribbler dribbler = new Dribbler(motorDribbler);
+
+		dribbler.dribble();
 
 		while (Button.ESCAPE.isUp()) {
 
@@ -91,7 +95,5 @@ public class BallSeeker {
 				break;
 			}
 		}
-
 	}
-
 }
