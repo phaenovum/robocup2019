@@ -68,7 +68,7 @@ public class BallSeeker {
 		} else if (angle == 0) {
 			pilot.forward();
 		} else if (angle <= 150 && angle >= -150) {
-			int angSpeed = Math.abs(angle);
+			int angSpeed = Math.abs(angle / 2);
 			if (angSpeed > pilot.getMaxAngularSpeed()) {
 				angSpeed = (int) pilot.getMaxAngularSpeed();
 			}
