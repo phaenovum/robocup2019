@@ -83,18 +83,23 @@ public class MindsensorsEV3SensorMUX extends I2CSensor {
 			int[] distance = new int[DATA_SIZE];
 
 			switchMode(MODE);
-			getData(REG_READ, data, DATA_SIZE);
+			getData(REG_READY, data, 1);
+			if (data[0] == 1) {
+				getData(REG_READ, data, DATA_SIZE);
 
-			for (int i = 0; i < DATA_SIZE; i++) {
-				if (data[i] < 0) {
-					distance[i] = 256 + data[i];
-				} else {
-					distance[i] = data[i];
+				for (int i = 0; i < DATA_SIZE; i++) {
+					if (data[i] < 0) {
+						distance[i] = 256 + data[i];
+					} else {
+						distance[i] = data[i];
+					}
+					// LCD.drawString("" + distance[i], 0, i);
 				}
-				// LCD.drawString("" + distance[i], 0, i);
+				int raw = distance[0] + (distance[1] << 8);
+				sample[offset] = (raw == 2550) ? Float.POSITIVE_INFINITY : (float) raw * toSI;
+			} else {
+				sample[offset] = Float.NaN;
 			}
-			int raw = distance[0] + (distance[1] << 8);
-			sample[offset] = (raw == 2550) ? Float.POSITIVE_INFINITY : (float) raw * toSI;
 		}
 	}
 
@@ -113,8 +118,13 @@ public class MindsensorsEV3SensorMUX extends I2CSensor {
 		public void fetchSample(float[] sample, int offset) {
 			byte[] data = new byte[1];
 			switchMode(MODE);
-			getData(REG_READ, data, 1);
-			sample[offset] = data[0];
+			getData(REG_READY, data, 1);
+			if (data[0] == 1) {
+				getData(REG_READ, data, 1);
+				sample[offset] = data[0];
+			} else {
+				sample[offset] = Float.NaN;
+			}
 		}
 
 		@Override
@@ -126,6 +136,7 @@ public class MindsensorsEV3SensorMUX extends I2CSensor {
 
 	class MindsensorsEV3SensorMUXPort {
 		private int i2c_address;
+
 		public MindsensorsEV3SensorMUXPort(int i2c_address) {
 			this.i2c_address = i2c_address;
 		}
