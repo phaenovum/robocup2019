@@ -60,7 +60,7 @@ public class BallSeeker {
 		seeker.getModulatedMode().fetchSample(sample_ir, 0);
 		int angle = (int) -sample_ir[0];
 		LCD.drawString("angle: " + angle, 0, 3);
-		if (sample_ir[0] == Float.NaN) {
+		if (Float.compare(sample_ir[0], Float.NaN) == 0) {
 			Sound.beep();
 			int dir = (int) (Math.random() * 2) - 1;
 			pilot.setAngularSpeed(10);
